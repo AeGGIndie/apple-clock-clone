@@ -58,13 +58,13 @@ const Scroller = ({ items }) => {
   }
 
   return (
-    <div className="flex flex-auto relative justify-center">
-      <div ref={scroller} onScroll={scrollHandler} onMouseDown={mouseDownHandler} className="scroller mt-40 mb-40 mr-8 ml-8 w-3/4 h-32 min-w-max bg-slate-300 rounded-3xl flex flex-col flex-auto cursor-grab overflow-auto justify-between snap-y snap-mandatory scroll-smooth absolute">
+    <div className="flex-auto flex items-start relative justify-center w-40 h-1/2">
+      <div ref={scroller} onScroll={scrollHandler} onMouseDown={mouseDownHandler} className="scroller mt-40 mb-40 w-3/4 h-32 min-w-max mx-8 bg-slate-300 rounded-3xl flex flex-col flex-auto cursor-grab overflow-auto justify-between snap-y snap-mandatory scroll-smooth relative basis-1/2">
         {
           items.map((item, index) => {return <ScrollerItem item={item} key={index} active={move} />})
         }
       </div>
-      <div ref={scrollSelector} className="relative selector z-10 bg-slate-50 opacity-30 w-3/4 h-8 mx-4 sm:mx-7 md:mx-10 lg:mx-12 translate-y-[650%] rounded-3xl">
+      <div ref={scrollSelector} className="basis-1/2 flex-auto absolute selector z-10 bg-slate-50 opacity-30 w-2/3 h-8 translate-y-[650%] rounded-3xl text-right">
         <div className="fixed h-full translate-y-[8%] left-[55%] text-right mx-2 mt-1.5 text-xs ">min</div>
       </div>
     </div>
