@@ -1,10 +1,11 @@
 import react from "react";
 
-const StartButton = ({ setTime, setIsTiming, isTiming }) => {
+const StartButton = ({ handleTimeStart, setIsTiming, isTiming }) => {
 
   const startHandler = () => {
     console.log('todo: start handler');
-    setIsTiming(!isTiming)
+    handleTimeStart();
+    setIsTiming(!isTiming);
   }
 
   return (
