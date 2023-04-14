@@ -2,27 +2,23 @@ import { useState, useRef } from 'react';
 import Scroller from './components/Scrolling/Scroller';
 import CancelButton from './components/Timing/CancelButton';
 import StartButton from './components/Timing/StartButton';
-import Timer, { timeInSeconds } from './components/Timing/Timer';
+import Timer from './components/Timing/Timer';
 
 function App() {
-  const items = [-1,0,1,2,3,4,5,6,7,8,9,10,-1];
-
-  const [time, setTime] = useState({ hours: 0, minutes: 0, seconds: 0 });
+  const hourItems = [-1, ...Array.from(new Array(24), (x, i) => i ), -1];
+  const minuteItems = [-1, ...Array.from(new Array(60), (x, i) => i ), -1];
+  const secondItems = [-1, ...Array.from(new Array(60), (x, i) => i ), -1];
   const [isTiming, setIsTiming] = useState(false);
 
   const hoursElement = useRef(null);
   const minutesElement = useRef(null);
   const secondsElement = useRef(null);
 
-  const handleTimeStart = () => {
+  const retrieveTime = () => {
     const hours = hoursElement.current ? Number(hoursElement.current.innerHTML) : 0;
     const minutes = minutesElement.current ? Number(minutesElement.current.innerHTML) : 0;
     const seconds = secondsElement.current ? Number(secondsElement.current.innerHTML) : 0;
-    setTime({
-      hours,
-      minutes,
-      seconds,
-    });
+    return { hours, minutes, seconds };
   }
 
   return (
@@ -33,12 +29,12 @@ function App() {
          */}
         
         <div className="flex flex-auto grow shrink w-[350px] h-[350px] justify-around min-w-full relative">
-          {isTiming ? <Timer time={time} isTiming={isTiming} />
+          {isTiming ? <Timer />
             : 
           <>
-            <Scroller scrolledElem={hoursElement} items={items} measurementText='hours' />
-            <Scroller scrolledElem={minutesElement} items={items} measurementText='mins' />
-            <Scroller scrolledElem={secondsElement} items={items} measurementText='secs' />
+            <Scroller scrolledElem={hoursElement} items={hourItems} measurementText='hours' />
+            <Scroller scrolledElem={minutesElement} items={minuteItems} measurementText='mins' />
+            <Scroller scrolledElem={secondsElement} items={secondItems} measurementText='secs' />
           </>
           }
         </div>      
@@ -49,12 +45,11 @@ function App() {
           <CancelButton 
             isTiming={isTiming} 
             setIsTiming={setIsTiming}
-            setTime={setTime}
           />
           <StartButton 
             isTiming={isTiming} 
             setIsTiming={setIsTiming} 
-            handleTimeStart={handleTimeStart}
+            retrieveTime={retrieveTime}
           />
         </div>
        </div>
@@ -62,4 +57,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

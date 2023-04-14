@@ -6,8 +6,13 @@ const Scroller = ({ items, scrolledElem, measurementText = "hours/mins/secs" }) 
   // const scrolledElement = useRef(null); // currently scrolled html element (within the selector)
   const scroller = useRef(null); // scroll container
   const scrollSelector = useRef(null); // scroll selector
-
   let position = { scrollTop: 0, y: 0 };
+
+  // each time the component is re-rendered
+  // we want to reset it to what is currently being hovered
+  useEffect(() => {
+    scrollHandler();
+  }, []);
 
   // check each of the children against the selector
   const scrollHandler = () => Array.from(scroller.current.children).forEach((child, index) => {

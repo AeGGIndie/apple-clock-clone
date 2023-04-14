@@ -1,10 +1,18 @@
 import react from "react";
+import { useBoundStore } from "../../stores/useBoundStore";
 
-const StartButton = ({ handleTimeStart, setIsTiming, isTiming }) => {
+const StartButton = ({ isTiming, setIsTiming, retrieveTime }) => {
+  const setTime = useBoundStore(state => state.setTime);
+  const startTimer = useBoundStore(state => state.startTimer);
+  const decreaseTime = useBoundStore(state => state.decreaseTime);
 
   const startHandler = () => {
-    console.log('todo: start handler');
-    handleTimeStart();
+    const { hours, minutes, seconds } = retrieveTime();
+    console.log(`setting a timer for ${hours}h ${minutes}min ${seconds}sec`);
+    setTime({ hours, minutes, seconds });
+    startTimer(() => {
+      decreaseTime();
+    }, 1000);
     setIsTiming(!isTiming);
   }
 

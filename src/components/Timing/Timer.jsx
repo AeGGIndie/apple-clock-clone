@@ -1,13 +1,26 @@
 // reference: https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/
 import react from "react";
 import { useEffect, useState } from "react";
+import { useBoundStore } from "../../stores/useBoundStore";
 
-const Timer = ({ time }) => {
+
+const Timer = () => {
+  const time = useBoundStore(state => state.time);
+  const resetTime = useBoundStore(state => state.resetTime);
+  const stopTimer = useBoundStore(state => state.stopTimer);
 
   const { hours, minutes, seconds } = time;
   const hourString = hours < 10 ? `0${hours}` : `${hours}`
   const minuteString = minutes < 10 ? `0${minutes}` : `${minutes}`
   const secondString = seconds < 10 ? `0${seconds}` : `${seconds}`
+
+  useEffect(() => {
+    const { hours, minutes, seconds } = time;
+    if (hours === 0 && minutes === 0 && seconds === 0){
+      stopTimer();
+    }
+    console.log("time - ", time);
+  }, [time]);
 
   return (
     <div className="flex flex-auto items-stretch justify-center bg-blue-600">
