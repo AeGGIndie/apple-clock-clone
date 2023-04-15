@@ -22,7 +22,7 @@ function App() {
   }
 
   return (
-    <div className="App bg-black m-0 w-screen h-screen max-h-screen max-w-screen block">
+    <div className="App bg-neutral-900 m-0 w-screen h-screen max-h-screen max-w-screen block">
       <div className='flex flex-col justify-center'>
         {/**
          * Area for Scroller and Timer
@@ -31,11 +31,12 @@ function App() {
         <div className="flex flex-auto grow shrink w-[350px] h-[350px] justify-around min-w-full relative">
           {isTiming ? <Timer />
             : 
-          <>
+          <div className="w-full flex flex-row">
             <Scroller scrolledElem={hoursElement} items={hourItems} measurementText='hours' />
             <Scroller scrolledElem={minutesElement} items={minuteItems} measurementText='mins' />
             <Scroller scrolledElem={secondsElement} items={secondItems} measurementText='secs' />
-          </>
+            <div className="absolute h-9 bg-slate-100 top-[207px] w-[80%] right-9 md:right-20 lg:right-[170px] lg:w-3/4 rounded opacity-[15%] z-20"/>
+          </div>
           }
         </div>      
         {/**

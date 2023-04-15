@@ -3,6 +3,7 @@ const MINUTE_IN_SECONDS = 60;
 
 export const createTimeSlice = (set) => ({
     time: { hours: 0, minutes: 0, seconds: 0 },
+    limit: { hours: 0, minutes: 0, seconds: 0 },
     setTime: (time) =>
         set({
             time: {
@@ -13,6 +14,14 @@ export const createTimeSlice = (set) => ({
         }),
     resetTime: () => set({ time: { hours: 0, minutes: 0, seconds: 0 } }),
     decreaseTime: () => set(decreaseTime),
+    setTimeLimit: (time) =>
+        set({
+            limit: {
+                hours: time.hours,
+                minutes: time.minutes,
+                seconds: time.seconds,
+            },
+        }),
 });
 
 const decreaseTime = (state) => {

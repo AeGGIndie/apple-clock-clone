@@ -5,11 +5,13 @@ const StartButton = ({ isTiming, setIsTiming, retrieveTime }) => {
   const setTime = useBoundStore(state => state.setTime);
   const startTimer = useBoundStore(state => state.startTimer);
   const decreaseTime = useBoundStore(state => state.decreaseTime);
+  const setTimeLimit = useBoundStore(state => state.setTimeLimit);
 
   const startHandler = () => {
     const { hours, minutes, seconds } = retrieveTime();
     console.log(`setting a timer for ${hours}h ${minutes}min ${seconds}sec`);
     setTime({ hours, minutes, seconds });
+    setTimeLimit({ hours, minutes, seconds });
     startTimer(() => {
       decreaseTime();
     }, 1000);
