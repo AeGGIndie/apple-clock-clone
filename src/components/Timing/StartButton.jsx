@@ -9,6 +9,9 @@ const StartButton = ({ isTiming, setIsTiming, retrieveTime }) => {
 
   const startHandler = () => {
     const { hours, minutes, seconds } = retrieveTime();
+    if (hours === 0 && minutes === 0 && seconds === 0){
+      return alert("Please choose how long you would like your timer to be");
+    }
     console.log(`setting a timer for ${hours}h ${minutes}min ${seconds}sec`);
     setTime({ hours, minutes, seconds });
     setTimeLimit({ hours, minutes, seconds });
